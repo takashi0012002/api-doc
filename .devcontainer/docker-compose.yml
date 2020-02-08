@@ -1,0 +1,18 @@
+version: "3"
+services:
+  web:
+    image: alpine
+    volumes:
+      - ..:/workspace:cached
+    tty: true
+    links:
+      - redoc
+  redoc:
+    image: redocly/redoc
+    volumes:
+      - ..:/usr/share/nginx/html/swagger
+    environment:
+      - SPEC_URL=http://localhost:8080/swagger/swagger.yml
+    ports:
+      - 8080:80
+
